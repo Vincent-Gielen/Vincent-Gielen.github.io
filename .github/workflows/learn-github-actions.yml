@@ -8,16 +8,10 @@ permissions:
   id-token: write
 
 jobs:
-  check-bats-version:
+  say-hi:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-      - run: npm install -g bats
-      - run: bats -v
-      - run: echo "I am ${{ github.actor }}"
+      - run: echo "Hi, I am ${{ github.actor }}, working in ${{ github.repository}}"
 
   deploy:
     runs-on: ubuntu-latest
@@ -25,9 +19,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./docs
       - name: Deploy to GitHub Pagess
