@@ -5,7 +5,6 @@
 layout: home
 ---
 
-# Vincent Gielen
 Welcome to my personal website.
 
 ## About me
